@@ -1,0 +1,2 @@
+minilab_navigation:minilab_simulation:minilab_teleop:robmobile_projet:test:traitement_carte
+-DCATKIN_DEVEL_PREFIX=/home/marion/catkin_ws/devel -DCMAKE_INSTALL_PREFIX=/home/marion/catkin_ws/install -G Unix Makefiles

@@ -1,0 +1,21 @@
+<launch>
+  <rosparam command="load" file="$(find robmobile_projet)/maps/my_map_simu_gazebo.yaml" param="param_yaml"/>
+
+ <node pkg="gmapping" name="slam_gmapping" type="slam_gmapping" output="screen">
+      <param name="scan" value="/scan" />
+    </node> 
+
+  	<node name="map_server" pkg="map_server" type="map_server" args="$(find robmobile_projet)/maps/my_map_simu_gazebo.yaml" param="param_yaml">
+    	<param name="frame_id" value="/map" />
+    	<remap from="/map" to="/static_map" />
+  	</node>
+
+  	<!--<node pkg="amcl" name="amcl" type="amcl" args="scan:=scan"/> -->
+
+	<include file="$(find minilab_simulation)/launch/minilab_gazebo.launch"/>
+
+	<!-- <include file="$(find p3dx_gazebo)/launch/gazebo.launch"/> -->
+
+	<node pkg="rviz" name="rviz" type="rviz"/>
+
+</launch>

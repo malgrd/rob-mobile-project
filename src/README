@@ -1,0 +1,56 @@
+source devel/setup.bash
+
+
+# Se connecter au robot
+ssh etudiant@192.168.0.3*
+
+#Activer drivers robot (avec ROSARIA)
+roslaunch pioneer.launch pioneer.launch
+
+# Pour faire bouger le robot
+rosrun test teleop.test
+
+# Pour faire gmapping, àlancer sur le robot ou en local
+rosrun gmapping slam_gmapping
+
+# Visualiser sur rviz
+rosrun rviz rviz
+
+# Sauver la map 
+rosrun map_server map_saver -f ~/catkin_ws/mymap_salle328
+
+#Pour faire gmapping avec pioneer
+#1
+ssh etudiant@192.168.0.3*
+#2
+roslaunch pioneer.launch pioneer.launch
+#3
+rosrun test teleop_test
+#4 
+rosrun gmapping slam_gmapping
+#5
+rosrun rviz rviz
+
+roslaunch minilab_simulation minilab_simulation.launch
+ #Envoyer des commandes à travers gazebo :
+rostopic  pub-1 /cmd_vel_geometry_msgs/twist '[0.1,0,0]' '[0,0,0.7]'
+
+#Faire du gmapping sur gazebo avec minilab
+roslaunch minilab_simulation minilab_simulation.launch 
+roslaunch robmobile_projet mongmapping.launch   #Permet de redimensionner l'image avec des xmin etc
+rosrun rviz rviz
+roslaunch minilab_teleop keyboard_ZQSD_teleop.launch #ou rosrun test teleop_test 
+
+#Faire deplacement aléatoire gazebo
+
+roslaunch minilab_simulation minilab_simulation.launch 
+rosrun robmobile_projet mapping_aleatoire
+
+# Charger une carte dans rviz 
+rosrun map_server map_server src/robmobile_projet/maps/my_map_simu_gazebo.yaml
+
+#Avoir modele du robot dans rviz etc :
+roslaunch minilab_simulation minilab_simulation.launch
+
+#Sert a se reperer dans une carte deja construite
+rosrun amcl amcl

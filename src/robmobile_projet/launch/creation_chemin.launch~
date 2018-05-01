@@ -1,0 +1,23 @@
+<launch>
+  	<rosparam command="load" file="$(find robmobile_projet)/maps/my_map_simu_gazebo.yaml" param="param_yaml"/>
+		
+	<include file="$(find minilab_simulation)/launch/minilab_gazebo.launch"/>
+
+	<!-- <node pkg="amcl" type="amcl" name="amcl" args="scan:=scan"/> -->
+
+	<node pkg="amcl" type="amcl" name="amcl" args="scan:=scan"/>
+	
+	<node name="map_server" pkg="map_server" type="map_server" args="$(find robmobile_projet)/maps/my_map_simu_gazebo.yaml">
+  	</node>
+
+	<!-- Lance rviz -->
+	<node pkg="rviz" type="rviz" name="rviz"/>
+	
+	<!-- Lance Le traitement de carte -->
+	<node name="traitement_carte" pkg="traitement_carte" type="traitement_carte_node" output="screen"/>
+
+	<!-- <node name="rrt_node" pkg="robmobile_projet" type="rrt" output="screen"/> -->
+
+</launch>
+
+

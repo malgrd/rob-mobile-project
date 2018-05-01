@@ -1,0 +1,8 @@
+prefix=/home/marion/catkin_ws/install
+
+Name: minilab_teleop
+Description: Description of minilab_teleop
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/marion/catkin_ws/install/lib 
+Requires: 
